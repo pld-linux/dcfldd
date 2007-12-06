@@ -6,7 +6,7 @@ License:	GPL v2
 Group:		Applications/System
 Source0:	http://dl.sourceforge.net/dcfldd/%{name}-%{version}-1.tar.gz
 # Source0-md5:	952026c872f11b53ce0ec6681a3eef0a
-URL:		http://dcfldd.sourceforge.net
+URL:		http://dcfldd.sourceforge.net/
 BuildRequires:	rpmbuild(macros) >= 1.167
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -15,34 +15,29 @@ dcfldd is an enhanced version of GNU dd with features useful for
 forensics and security. Based on the dd program found in the GNU
 Coreutils package, dcfldd has the following additional features:
 
-    - Hashing on-the-fly - dcfldd can hash the input data as it is being
-      transferred, helping to ensure data integrity.
-    - Status output - dcfldd can update the user of its progress in terms
-      of the amount of data transferred and how much longer operation will
-      take.
-    - Flexible disk wipes - dcfldd can be used to wipe disks quickly and
-      with a known pattern if desired.
-    - Image/wipe Verify - dcfldd can verify that a target drive is a
-      bit-for-bit match of the specified input file or pattern.
-    - Multiple outputs - dcfldd can output to multiple files or disks at
-      the same time.
-    - Split output - dcfldd can split output to multiple files with more
-      configurability than the split command.
-    - Piped output and logs - dcfldd can send all its log data and output
-      to commands as well as files natively.
+- Hashing on-the-fly - dcfldd can hash the input data as it is being
+  transferred, helping to ensure data integrity.
+- Status output - dcfldd can update the user of its progress in terms
+  of the amount of data transferred and how much longer operation will
+  take.
+- Flexible disk wipes - dcfldd can be used to wipe disks quickly and
+  with a known pattern if desired.
+- Image/wipe Verify - dcfldd can verify that a target drive is a
+  bit-for-bit match of the specified input file or pattern.
+- Multiple outputs - dcfldd can output to multiple files or disks at
+  the same time.
+- Split output - dcfldd can split output to multiple files with more
+  configurability than the split command.
+- Piped output and logs - dcfldd can send all its log data and output
+  to commands as well as files natively.
 
 %prep
 %setup -q -n %{name}-%{version}-1
 
 %build
-./configure \
-	--prefix=%{_prefix} \
-	--infodir=%{_infodir} \
-	--mandir=%{_mandir}
+%configure
 
-%{__make} \
-	CXX="%{__cxx}" \
-	CXXFLAGS="%{rpmcxxflags}"
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
