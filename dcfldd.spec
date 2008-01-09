@@ -1,4 +1,5 @@
 Summary:	Enhanced version of GNU dd with features useful for forensics
+Summary(pl.UTF-8):	Rozszerzona wersja GNU dd z opcjami do śledzenia
 Name:		dcfldd
 Version:	1.3.4
 Release:	1
@@ -30,6 +31,28 @@ Coreutils package, dcfldd has the following additional features:
   configurability than the split command.
 - Piped output and logs - dcfldd can send all its log data and output
   to commands as well as files natively.
+
+%description -l pl.UTF-8
+dcfldd to rozszerzona wersja GNU dd z opcjami przydatnymi przy
+śledzeniu i utrzymywaniu bezpieczeństwa. Opierając się na programie dd
+z pakietu GNU Coreutils dcfldd ma następujące dodatkowe możliwości:
+
+- Haszowanie w locie: dcfldd potrafi haszować dane wejściowe w trakcie
+  przesyłania, co pomaga w zachowaniu ich spójności.
+- Wyjście diagnostyczne: dcfldd może informować użytkownika o
+  postępach w postaci ilości przesłanych danych i pozostałym czasie
+  operacji.
+- Elastyczne czyszczenie dysku: dcfldd może być używany do szybkiego
+  usuwania danych z dysku, ewentualnie z użyciem znanego wzorca.
+- Kontrola obrazów i czyszczenia: dcfldd potrafi sprawdzać, czy dysk
+  docelowy zgadza się co do bitu z podanym plikiem wejściowym lub
+  wzorcem.
+- Wiele wyjść: dcfldd potrafi zapisywać wiele plików lub dysków w tym
+  samym czasie.
+- Podział wyjścia: dcfldd potrafi podzielić wyjście na wiele plików w
+  sposób bardziej konfigurowalny niż robi to polecenie split.
+- Wyjście i logowanie przez potoki: dcfldd może wysyłać dane wyjściowe
+  i logi do innych poleceń, a także plików.
 
 %prep
 %setup -q -n %{name}-%{version}-1
