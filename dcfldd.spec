@@ -1,13 +1,17 @@
 Summary:	Enhanced version of GNU dd with features useful for forensics
 Summary(pl.UTF-8):	Rozszerzona wersja GNU dd z opcjami do śledzenia
 Name:		dcfldd
-Version:	1.3.4
+Version:	1.9.2
 Release:	1
 License:	GPL v2
 Group:		Applications/System
-Source0:	http://dl.sourceforge.net/dcfldd/%{name}-%{version}-1.tar.gz
-# Source0-md5:	952026c872f11b53ce0ec6681a3eef0a
-URL:		http://dcfldd.sourceforge.net/
+#Source0Download: https://github.com/resurrecting-open-source-projects/dcfldd/releases
+Source0:	https://github.com/resurrecting-open-source-projects/dcfldd/archive/v%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	293ff59a9cc7f9865816ca041272b468
+URL:		https://github.com/resurrecting-open-source-projects/dcfldd
+BuildRequires:	autoconf >= 2.69
+BuildRequires:	automake
+BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.167
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -55,10 +59,15 @@ z pakietu GNU Coreutils dcfldd ma następujące dodatkowe możliwości:
   i logi do innych poleceń, a także plików.
 
 %prep
-%setup -q -n %{name}-%{version}-1
+%setup -q
 
 %build
-%configure
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+%configure \
+	--with-bash-completion=%{bash_compdir}
 
 %{__make}
 
@@ -73,6 +82,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README
+%doc AUTHORS ChangeLog NEWS README.md
 %attr(755,root,root) %{_bindir}/dcfldd
-%{_mandir}/man1/*
+%{bash_compdir}/dcfldd-bash_completion
+%{_mandir}/man1/dcfldd.1*
